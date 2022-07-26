@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { proprietariosRoutes } from 'modules/proprietarios/routes/order.router'
+import { proprietariosRoutes } from 'modules/proprietarios/routes/proprietario.router'
 
 const routes = Router()
 
