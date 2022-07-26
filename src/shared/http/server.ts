@@ -6,8 +6,14 @@ import cors from 'cors'
 import { errors } from 'celebrate'
 import { AppError } from 'shared/errors/AppError'
 import { routes } from './routes'
+import { connection } from 'database/database'
+import 'modules/proprietarios/repositories/Proprietario'
+import 'database/Animais'
 
-global.FILE_NAME = 'pedidos.json'
+connection
+  .authenticate()
+  .then(() => logger.info('The connection was made successfully!'))
+  .catch(error => logger.error(error.message))
 
 const app = express()
 app.use(cors())

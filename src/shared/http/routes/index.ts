@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { ordersRoutes } from 'modules/orders/routes/order.router'
+import { proprietariosRoutes } from 'modules/proprietarios/routes/order.router'
 
 const routes = Router()
 
-routes.use('/orders', ordersRoutes)
+routes.use('/proprietario', proprietariosRoutes)
 
 export { routes }

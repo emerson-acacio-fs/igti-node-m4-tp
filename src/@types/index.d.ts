@@ -3,7 +3,6 @@ import winston from 'winston'
 
 declare global {
   var logger: winston.Logger
-  var FILE_NAME: string
 }
 
 export {}
