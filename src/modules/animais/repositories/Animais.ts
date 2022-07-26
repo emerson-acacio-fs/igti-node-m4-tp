@@ -5,13 +5,14 @@ import {
   DataTypes,
   ForeignKey,
 } from 'sequelize'
-import { connection } from './database'
-import { Proprietario } from '../modules/proprietarios/repositories/Proprietario'
+import { connection } from '../../../database/database'
+import { Proprietario } from '../../proprietarios/repositories/Proprietario'
 
 class Animal extends Model<
   InferAttributes<Animal>,
   InferCreationAttributes<Animal>
 > {
+  id?: number
   nome: string
   tipo: string
   proprietarioId: ForeignKey<number>
@@ -19,6 +20,12 @@ class Animal extends Model<
 
 Animal.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
     nome: { type: DataTypes.STRING, allowNull: false },
     tipo: { type: DataTypes.STRING, allowNull: false },
   },

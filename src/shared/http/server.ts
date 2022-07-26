@@ -8,7 +8,7 @@ import { AppError } from 'shared/errors/AppError'
 import { routes } from './routes'
 import { connection } from 'database/database'
 import 'modules/proprietarios/repositories/Proprietario'
-import 'database/Animais'
+import 'modules/animais/repositories/Animais'
 
 connection
   .authenticate()
