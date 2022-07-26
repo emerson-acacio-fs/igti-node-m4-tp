@@ -7,7 +7,11 @@ import { updateAnimalService } from '../services/update.animal.service'
 
 class AnimalController {
   async show(request: Request, response: Response) {
-    const listaDeAnimais = await showAnimalService.execute()
+    const { proprietarioId } = request.query
+
+    const listaDeAnimais = await showAnimalService.execute(
+      proprietarioId ? parseInt(proprietarioId.toString()) : undefined,
+    )
     response.send(listaDeAnimais)
   }
   async create(request: Request, response: Response) {

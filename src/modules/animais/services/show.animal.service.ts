@@ -4,8 +4,8 @@ import {
 } from '../repositories/animais.repository'
 
 class ShowAnimalService {
-  async execute(): Promise<TFullAnimal[]> {
-    return await animalRepository.show()
+  async execute(proprietarioId?: number): Promise<TFullAnimal[]> {
+    return await animalRepository.show(proprietarioId)
   }
 }
 

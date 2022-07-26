@@ -9,7 +9,10 @@ export interface IUpdateAnimal {
   proprietarioId?: number
 }
 class AnimalRepository {
-  async show(): Promise<Animal[]> {
+  async show(proprietarioId?: number): Promise<Animal[]> {
+    if (proprietarioId) {
+      return await Animal.findAll({ where: { proprietarioId } })
+    }
     return await Animal.findAll()
   }
   async getById(id: number): Promise<Animal | null> {
