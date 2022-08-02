@@ -1,3 +1,4 @@
+import { Animal } from 'modules/animais/model/Animais'
 import { Servico } from '../model/Servicos'
 
 export type TCreateServico = Pick<Servico, 'animalId' | 'descricao' | 'valor'>
@@ -9,11 +10,13 @@ export interface IUpdateServico {
   animalId?: number
 }
 class ServicoRepository {
-  async show(animalId?: number): Promise<Servico[]> {
-    if (animalId) {
-      return await Servico.findAll({ where: { animalId } })
+  async show(proprietarioId?: number): Promise<Servico[]> {
+    if (proprietarioId) {
+      return await Servico.findAll({
+        include: [{ model: Animal, where: { proprietarioId } }],
+      })
     }
-    return await Servico.findAll()
+    return await Servico.findAll({ include: [{ model: Animal }] })
   }
   async getById(id: number): Promise<Servico | null> {
     return await Servico.findByPk(id)

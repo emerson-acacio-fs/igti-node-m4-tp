@@ -4,8 +4,8 @@ import {
 } from '../repositories/servicos.repository'
 
 class ShowServicoService {
-  async execute(animalId?: number): Promise<TFullServico[]> {
-    return await animalRepository.show(animalId)
+  async execute(proprietarioId?: number): Promise<TFullServico[]> {
+    return await animalRepository.show(proprietarioId)
   }
 }
 
