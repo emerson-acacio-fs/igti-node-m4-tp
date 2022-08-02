@@ -1,4 +1,4 @@
-import { Proprietario } from '../repositories/Proprietario'
+import { Proprietario } from '../model/Proprietario'
 import { proprietarioRepository } from '../repositories/proprietarios.repository'
 
 class GetByIdProprietarioService {

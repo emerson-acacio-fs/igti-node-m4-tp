@@ -1,4 +1,4 @@
-import { Animal } from './Animais'
+import { Animal } from '../model/Animais'
 
 export type TCreateAnimal = Pick<Animal, 'proprietarioId' | 'nome' | 'tipo'>
 export type TFullAnimal = Animal

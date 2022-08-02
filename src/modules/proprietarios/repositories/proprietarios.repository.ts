@@ -1,4 +1,4 @@
-import { Proprietario } from './Proprietario'
+import { Proprietario } from '../model/Proprietario'
 
 export type TCreateProprietario = Pick<Proprietario, 'nome' | 'telefone'>
 export type TFullProprietario = Proprietario

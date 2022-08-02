@@ -1,3 +1,7 @@
+import { connection } from 'database/database'
+import { Proprietario } from 'modules/proprietarios/model/Proprietario'
+import { Servico } from 'modules/servicos/model/Servicos'
+
 import {
   Model,
   InferAttributes,
@@ -5,8 +9,6 @@ import {
   DataTypes,
   ForeignKey,
 } from 'sequelize'
-import { connection } from '../../../database/database'
-import { Proprietario } from '../../proprietarios/repositories/Proprietario'
 
 class Animal extends Model<
   InferAttributes<Animal>,
@@ -18,28 +20,25 @@ class Animal extends Model<
   proprietarioId: ForeignKey<number>
 }
 
-Animal.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-      allowNull: false,
+function initAnimal(): void {
+  Animal.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+      },
+      nome: { type: DataTypes.STRING, allowNull: false },
+      tipo: { type: DataTypes.STRING, allowNull: false },
     },
-    nome: { type: DataTypes.STRING, allowNull: false },
-    tipo: { type: DataTypes.STRING, allowNull: false },
-  },
-  { sequelize: connection, tableName: 'animais', modelName: 'animal' },
-)
-
-Proprietario.hasMany(Animal, { foreignKey: { allowNull: false } })
-Animal.belongsTo(Proprietario)
-
-// Animal.sync({ force: true })
-
-// create()
-
-async function create() {
+    { sequelize: connection, tableName: 'animais', modelName: 'animal' },
+  )
+}
+function associateAnimal(): void {
+  Animal.belongsTo(Proprietario, { foreignKey: { allowNull: false } })
+}
+async function createData(): Promise<void> {
   await Proprietario.create<Proprietario>({
     nome: 'Alda Valentim',
     telefone: '(39) 98566-1222',
@@ -64,6 +63,7 @@ async function create() {
     nome: 'Richard Santos',
     telefone: '(27) 99597-9170',
   })
+
   await Animal.create<Animal>({
     nome: 'Billy',
     tipo: 'Cachorro',
@@ -101,6 +101,35 @@ async function create() {
     tipo: 'Cachorro',
     proprietarioId: 6,
   })
+  await Servico.create<Servico>({ descricao: 'Banho', valor: 30, animalId: 1 })
+  await Servico.create<Servico>({ descricao: 'Banho', valor: 30, animalId: 5 })
+  await Servico.create<Servico>({ descricao: 'Banho', valor: 30, animalId: 6 })
+  await Servico.create<Servico>({ descricao: 'Banho', valor: 30, animalId: 9 })
+  await Servico.create<Servico>({
+    descricao: 'Banho e Tosa',
+    valor: 60,
+    animalId: 2,
+  })
+  await Servico.create<Servico>({
+    descricao: 'Banho e Tosa',
+    valor: 60,
+    animalId: 7,
+  })
+  await Servico.create<Servico>({
+    descricao: 'Consulta',
+    valor: 200,
+    animalId: 3,
+  })
+  await Servico.create<Servico>({
+    descricao: 'Consulta',
+    valor: 200,
+    animalId: 8,
+  })
+  await Servico.create<Servico>({
+    descricao: 'Consulta',
+    valor: 200,
+    animalId: 2,
+  })
 }
 
-export { Animal }
+export { Animal, initAnimal, associateAnimal, createData }

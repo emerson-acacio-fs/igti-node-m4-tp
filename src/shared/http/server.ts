@@ -7,12 +7,30 @@ import { errors } from 'celebrate'
 import { AppError } from 'shared/errors/AppError'
 import { routes } from './routes'
 import { connection } from 'database/database'
-import 'modules/proprietarios/repositories/Proprietario'
-import 'modules/animais/repositories/Animais'
+import 'modules/proprietarios/model/Proprietario'
+import 'modules/animais/model/Animais'
+import {
+  associateAnimal,
+  createData,
+  initAnimal,
+} from 'modules/animais/model/Animais'
+import { initProprietario } from 'modules/proprietarios/model/Proprietario'
+import { associateServico, initServico } from 'modules/servicos/model/Servicos'
+
+initAnimal()
+initProprietario()
+initServico()
+
+associateAnimal()
+associateServico()
 
 connection
   .authenticate()
-  .then(() => logger.info('The connection was made successfully!'))
+  .then(() => {
+    logger.info('The connection was made successfully!')
+    // connection.sync({ force: true })
+    // createData()
+  })
   .catch(error => logger.error(error.message))
 
 const app = express()

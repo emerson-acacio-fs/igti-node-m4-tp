@@ -1,4 +1,4 @@
-import { Animal } from '../repositories/Animais'
+import { Animal } from '../model/Animais'
 import { animalRepository } from '../repositories/animais.repository'
 
 class GetByIdAnimalService {
