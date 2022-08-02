@@ -29,7 +29,7 @@ function initServico(): void {
         allowNull: false,
       },
       descricao: { type: DataTypes.STRING, allowNull: false },
-      valor: { type: DataTypes.FLOAT, allowNull: false },
+      valor: { type: DataTypes.DOUBLE, allowNull: false },
     },
     { sequelize: connection, tableName: 'servicos', modelName: 'servico' },
   )
